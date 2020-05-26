@@ -13,18 +13,19 @@
 	<!-- Material Design Bootstrap -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css" rel="stylesheet">
 
-	<!-- IndieFlower google font -->
-	<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+	<!-- 	
+		Custom style, inspired from : https://codepen.io/andydlindsay/pen/bwzRxw
+ 	-->
+ 	<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+ 	<link rel="stylesheet" type="text/css" href="resources/css/style.css">
 
-	<!-- Custom style -->
-	<link rel="stylesheet" type="text/css" href="resources/css/style.css">
 </head>
 <body>
 	<!-- Top container -->
 	<div class="container d-flex justify-content-center">
 
 		<!-- Game container: Has the board and the options -->
-		<div class="game-container text-center">
+		<div class="game-container text-center mt-5">
 
 			<!-- Game board -->
 			<div class="game-board">
@@ -32,20 +33,20 @@
 				<table>
 					<tbody>
 						<tr class="game-row">
-							<td id="0" class="game-cell">X</td>
-							<td id="1" class="game-cell">O</td>
-							<td id="2" class="game-cell">X</td>
+							<td id="0" class="game-cell"></td>
+							<td id="1" class="game-cell"></td>
+							<td id="2" class="game-cell"></td>
 						</tr>
 
 						<tr class="game-row">
-							<td id="3" class="game-cell">O</td>
+							<td id="3" class="game-cell"></td>
 							<td id="4" class="game-cell"></td>
-							<td id="5" class="game-cell">O</td>
+							<td id="5" class="game-cell"></td>
 						</tr>
 
 						<tr class="game-row">
 							<td id="6" class="game-cell"></td>
-							<td id="7" class="game-cell">X</td>
+							<td id="7" class="game-cell"></td>
 							<td id="8" class="game-cell"></td>
 						</tr>
 					</tbody>
@@ -80,6 +81,9 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<!-- MDB core JavaScript -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/js/mdb.min.js"></script>
+
+	<!-- Tic tac toe JavaScript -->
+	<script src="resources/js/main.js" type="text/javascript" charset="utf-8" async defer></script>
 
 </body>
 </html>

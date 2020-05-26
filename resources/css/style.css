@@ -11,7 +11,7 @@
   height: 100px;
   border: 2px solid #57ABAA;
   cursor: pointer;
-  font-size: 72px; }
+  font-size: 65px; }
 
 /*Remove the left side border for all the first cell in each row.*/
 .game-cell:first-child {
