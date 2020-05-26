@@ -69,10 +69,29 @@
 		}
 
 		.options-board {
-			margin: 10px 0px;
+			margin-top: 10px;
 			height: 100px;
 			border: 1px solid black;
 			border-radius: 10px;
+			background-color: #609275;
+
+			font-family: 'Indie Flower', cursive;
+			font-size:18px;
+			color: #DEBE87;
+		}
+
+		.feedback-container {
+			font-size:40px;
+		}
+
+		.game-button {
+			border-style: none;
+			color: inherit;
+			text-decoration: underline;
+		}
+
+		.game-button:focus {
+			outline: none;
 		}
 
 	</style>
@@ -107,6 +126,19 @@
 			</div>
 
 			<div class="options-board">
+				<div class="d-block">
+					<div class="progress-container">
+						<!-- Feedback Box -->
+						<div class="feedback-container">
+							<span>Tic Tac Toe</span>
+						</div>
+						<!-- Restart -->
+						<div>
+							<button id="startGameButton" class="game-button bg-transparent d-none" type="submit">Start Game</button>
+							<button id="restartGameButton" class="game-button bg-transparent" type="submit">Restart</button>
+						</div>
+					</div>
+				</div>
 
 			</div>
 		</div>
