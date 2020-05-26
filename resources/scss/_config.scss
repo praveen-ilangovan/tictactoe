@@ -1,0 +1,26 @@
+// Style sheet variables
+
+// Cell size
+$cell-size: 100px;
+
+// Colors
+$wood-brown: #925652;
+$board-green: #609275;
+$border-blue: #57ABAA;
+$text-yellow: #DEBE87;
+
+// Fonts
+$font-family: 'Indie Flower', cursive;
+$cell-font-size: 72px;
+$feedback-font-size: 40px;
+
+// Borders
+$generic-border: 1px solid black;
+
+// Base classes
+// Rounded corners for the containers
+// Add them to a container to make them rounded.
+.rounded-border {
+	border-radius: 10px;
+	border: $generic-border;
+}

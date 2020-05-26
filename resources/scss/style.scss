@@ -1,0 +1,49 @@
+// Main style scss file for the tictactoe board
+
+// Config import
+@import 'config';
+
+// board
+@import 'board';
+
+// Set margin and padding to zero
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+// Game container
+.game-container {
+	@extend .rounded-border;
+
+	padding: 10px;	
+	background-color: $wood-brown;
+	font-family: $font-family;
+	color: $text-yellow;
+}
+
+// Options
+.options {
+	@extend .rounded-border;
+
+	margin-top: 10px;
+	height: $cell-size;
+	background-color: $board-green;
+}
+
+// Feedback text
+.feedback-container {
+	font-size:$feedback-font-size;
+}
+
+// Buttons
+.game-button {
+	border-style: none;
+	color: inherit;
+	text-decoration: underline;
+}
+
+.game-button:focus {
+	outline: none;
+}

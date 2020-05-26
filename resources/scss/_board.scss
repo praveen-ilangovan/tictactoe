@@ -1,0 +1,36 @@
+// Design the game board
+
+.game-board {
+	@extend .rounded-border;
+	
+	padding: 10px;
+	background-color: $board-green;
+}
+
+.game-cell {
+	width: $cell-size;
+	height: $cell-size;
+	border: 2px solid $border-blue;
+	cursor: pointer;
+	font-size: $cell-font-size;
+}
+
+/*Remove the left side border for all the first cell in each row.*/
+.game-cell:first-child {
+	border-left: 0;
+}
+
+/*Remove the right side border for all the last cell in each row.*/
+.game-cell:last-child {
+	border-right: 0;
+}
+
+/*Remove the top border for all the cells in the first row.*/
+.game-row:first-child td {
+	border-top: 0;
+}
+
+/*Remove the bottom border for all the cells in the last row.*/
+.game-row:last-child td {
+	border-bottom: 0;
+}
