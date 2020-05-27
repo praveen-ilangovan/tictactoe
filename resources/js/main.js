@@ -121,8 +121,9 @@ class TicTacToe {
 		// Check if the game is over before proceeding
 		const game_result = this.isGameOver(board);
 		if (game_result["result"] === TicTacToe.WIN) {
+			const depthFactor = depth ? 1/depth : 1;
 			const score = game_result["player"] === this.computerPlayer ? TicTacToe.WIN_SCORE : TicTacToe.LOSE_SCORE;
-			return {"score" : score}
+			return {"score" : score*depthFactor};
 		} else if (game_result["result"] === TicTacToe.TIE) {
 			return {"score" : TicTacToe.TIE_SCORE}
 		}
