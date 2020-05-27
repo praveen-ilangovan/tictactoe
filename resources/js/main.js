@@ -73,7 +73,7 @@ class TicTacToe {
 	/**
 	 * Play
 	 */
-	play(slot) {
+	play(slot, player) {
 		//
 		if (this.gameOver)
 			throw new Error("Game over! Please reset the board");
@@ -83,27 +83,14 @@ class TicTacToe {
 			throw new Error(`${slot} is not a valid slot.`);
 
 		// Human player wants to play a slot. Mark it with his symbol
-		this.board[slot] = this.humanPlayer;
+		this.board[slot] = player;
 
 		// Check if the game is over
 		let result = this.isGameOver();
-		if (result["result"] !== TicTacToe.CONTINUE){
+		if (result["result"] !== TicTacToe.CONTINUE)
 			this.gameOver = true;
-			return result
-		}
 
-		// Get the next best move for the computer to play;
-		const bestSlot = this.getNextBestSlot();
-		this.board[bestSlot] = this.computerPlayer;
-
-		this.display();
-
-		// Check if the game is over
-		result = this.isGameOver();
-		if (result["result"] !== TicTacToe.CONTINUE){
-			this.gameOver = true;
-		}
-		return result;
+		return result
 	}
 
 	/**
@@ -247,7 +234,58 @@ class TicTacToe {
 }
 
 
+// *************************************************************************************
+// 
+// Gameplay
+// 
+// *************************************************************************************
 
+function updateFeedback(msg) {
+	feedbackBox.textContent = msg;
+}
+
+function displayRestartButton(status) {
+	if (status)
+		restartGameButton.classList.remove("d-none")
+	else
+		restartGameButton.classList.add("d-none")
+}
+
+function clearCells() {
+	for (const cell of cells) {
+		cell.textContent = "";
+	}
+}
+
+function play(cell, player) {
+	let result;
+
+	try {
+		result = GAME.play(parseInt(cell.id), player);
+	} catch (err) {
+		console.log(err);
+		return false;
+	}
+
+	// Update the board
+	cell.textContent = player;
+
+	// is Game Over
+	if (!GAME.gameOver) {
+		updateFeedback("Game in progress");
+		displayRestartButton(true);
+		return false
+	}
+
+	let msg = "Game Tie"
+	if (result["result"] === TicTacToe.WIN) {
+		let name = result["player"] === GAME.humanPlayer ? "Human" : "Computer"
+		msg = name + " won!!"
+	}
+
+	updateFeedback(msg);
+	return true;
+}
 
 // *************************************************************************************
 // 
@@ -256,14 +294,20 @@ class TicTacToe {
 // *************************************************************************************
 
 function cellClicked(e) {
-	console.log(e.target.id);
+	play(e.target, GAME.humanPlayer);
+	if (GAME.gameOver)
+		return
 
-	if (e.target.textContent) {
-		console.log("Invalid cell");
-		return;
-	}
-	
-	e.target.textContent = "X";
+	// // Get the next best move for the computer to play;
+	const bestSlot = GAME.getNextBestSlot();
+	gameOver = play(cells[bestSlot], GAME.computerPlayer);
+}
+
+function restartGame(e) {
+	GAME.reset();
+	updateFeedback("Tic Tac Toe");
+	displayRestartButton(false);
+	clearCells();
 }
 
 // *************************************************************************************
@@ -272,6 +316,9 @@ function cellClicked(e) {
 // 
 // *************************************************************************************
 const cells = document.getElementsByClassName("game-cell");
+const feedbackBox = document.getElementById("feedback");
+const restartGameButton = document.getElementById("restartGameButton");
+
 
 // *************************************************************************************
 // 
@@ -282,10 +329,12 @@ for (const cell of cells) {
 	cell.addEventListener("click", cellClicked);
 }
 
+restartGameButton.addEventListener("click", restartGame);
+
 // *************************************************************************************
 // 
 // Initializers
 // 
 // *************************************************************************************
-console.log("Lets play TicTacToe");
-console.log(cells);
+const GAME = new TicTacToe();
+restartGame();
