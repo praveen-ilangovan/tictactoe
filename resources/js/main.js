@@ -240,10 +240,20 @@ class TicTacToe {
 // 
 // *************************************************************************************
 
+/**
+ * Display a feedback message in the game board.
+ *
+ * @param {String} msg
+ */
 function updateFeedback(msg) {
 	feedbackBox.textContent = msg;
 }
 
+/**
+ * Display restart button
+ *
+ * @param {bool} status
+ */
 function displayRestartButton(status) {
 	if (status)
 		restartGameButton.classList.remove("d-none")
@@ -251,12 +261,21 @@ function displayRestartButton(status) {
 		restartGameButton.classList.add("d-none")
 }
 
+/**
+ * Clear the contents of the cells
+ */
 function clearCells() {
 	for (const cell of cells) {
 		cell.textContent = "";
 	}
 }
 
+/**
+ * Play the game.
+ *
+ * @param {DOMElement} cell
+ * @param {String} player
+ */
 function play(cell, player) {
 	let result;
 
@@ -274,7 +293,7 @@ function play(cell, player) {
 	if (!GAME.gameOver) {
 		updateFeedback("Game in progress");
 		displayRestartButton(true);
-		return false
+		return true
 	}
 
 	let msg = "Game Tie"
@@ -284,7 +303,7 @@ function play(cell, player) {
 	}
 
 	updateFeedback(msg);
-	return true;
+	return false;
 }
 
 // *************************************************************************************
@@ -293,14 +312,23 @@ function play(cell, player) {
 // 
 // *************************************************************************************
 
+function cellMouseDown(e) {
+	let bgcolor = (e.target.textContent || GAME.gameOver) ? "#6f3940" : "#426651";
+	e.target.style.backgroundColor = bgcolor;
+}
+
+function cellMouseUp(e) {
+	e.target.style.backgroundColor = "#609275";
+}
+
 function cellClicked(e) {
-	play(e.target, GAME.humanPlayer);
-	if (GAME.gameOver)
+	let proceed = play(e.target, GAME.humanPlayer);
+	if (!proceed)
 		return
 
 	// // Get the next best move for the computer to play;
 	const bestSlot = GAME.getNextBestSlot();
-	gameOver = play(cells[bestSlot], GAME.computerPlayer);
+	play(cells[bestSlot], GAME.computerPlayer);
 }
 
 function restartGame(e) {
@@ -327,6 +355,8 @@ const restartGameButton = document.getElementById("restartGameButton");
 // *************************************************************************************
 for (const cell of cells) {
 	cell.addEventListener("click", cellClicked);
+	cell.addEventListener("mousedown", cellMouseDown);
+	cell.addEventListener("mouseup", cellMouseUp);
 }
 
 restartGameButton.addEventListener("click", restartGame);
