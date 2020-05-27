@@ -1,0 +1,13 @@
+// Blinking animation
+
+.blinking{
+	animation:blinkingText 1s infinite;
+}
+
+@keyframes blinkingText{
+	0%{     color: $text-yellow;    }
+	49%{    color: $text-yellow; }
+	60%{    color: transparent; }
+	99%{    color:transparent;  }
+	100%{   color: $text-yellow;    }
+}

@@ -241,6 +241,15 @@ class TicTacToe {
 // *************************************************************************************
 
 /**
+ * Make the winning slots blink!!
+ */
+function animateWinningSlots(slots) {
+	for (const slot of slots) {
+		cells[slot].classList.add("blinking");
+	}
+}
+
+/**
  * Display a feedback message in the game board.
  *
  * @param {String} msg
@@ -267,6 +276,8 @@ function displayRestartButton(status) {
 function clearCells() {
 	for (const cell of cells) {
 		cell.textContent = "";
+		// Remove blinking class if exists
+		cell.classList.remove("blinking");
 	}
 }
 
@@ -282,7 +293,6 @@ function play(cell, player) {
 	try {
 		result = GAME.play(parseInt(cell.id), player);
 	} catch (err) {
-		console.log(err);
 		return false;
 	}
 
@@ -298,6 +308,7 @@ function play(cell, player) {
 
 	let msg = "Game Tie"
 	if (result["result"] === TicTacToe.WIN) {
+		animateWinningSlots(result["slots"]);
 		let name = result["player"] === GAME.humanPlayer ? "Human" : "Computer"
 		msg = name + " won!!"
 	}
